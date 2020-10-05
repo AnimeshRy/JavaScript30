@@ -7,6 +7,14 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const secretcode = 'animesh';
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key);
+    pressed.length > secretcode.length && pressed.shift();
+    const word = pressed.join('');
+    word === secretcode && cornify_add();
+  })
 </script>
 </body>
 </html>
