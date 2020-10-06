@@ -58,6 +58,27 @@
       };
     }
 
+  function checkslide(e) {
+    sliderImages.forEach(image => {
+      // slide in when the scroll is at the middle of the image
+      const slideinAt = (window.scrollY + window.innerHeight) - image.height / 2 ;
+      // offsetTop gives the distance from top of the window till the top of the image,
+      // so we minus the image height to reach the bottom of the image
+      const imageBottom = image.offsetTop - image.height;
+      const ishalfShown = slideinAt > image.offsetTop;
+      const isNotScrolled = window.scrollY < imageBottom;
+      if (ishalfShown && isNotScrolled) {
+       image.classList.add('active');
+      }  
+      else {
+       image.classList.remove('active')  
+      }
+    });
+  }
+
+  const sliderImages = document.querySelectorAll('.slide-in');
+
+  window.addEventListener('scroll', debounce(checkslide));
   </script>
 
   <style>
