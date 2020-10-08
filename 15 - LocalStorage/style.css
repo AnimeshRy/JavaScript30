@@ -79,3 +79,11 @@ h2 {
   outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
+.clear-btn {
+  margin: 2%;
+  padding:2%;
+  background-color: rgb(29, 26, 26);
+  color: white;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+}

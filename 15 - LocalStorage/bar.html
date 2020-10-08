@@ -23,12 +23,17 @@
       <input type="text" name="item" placeholder="Item Name" required autocomplete="off">
       <input type="submit" value="+ Add Item">
     </form>
+  <button class="clear-btn">
+    Clear
+  </button>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const clear = document.querySelector('.clear-btn');
+  // use local storage items if present or use a empty array
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
   function additem(e){
     e.preventDefault(); // prevent form from reloading the page
@@ -39,6 +44,8 @@
     }
     items.push(item);
     populateList(items, itemsList);
+    // convert array to string before storing
+    localStorage.setItem('items', JSON.stringify(items));
     this.reset();
   }
 
@@ -46,13 +53,30 @@
     platesList.innerHTML = plates.map((plate, i) => {
       return `
       <li>
-        <label for="">${plate.text}</label>
+        <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked': ''}  />
+        <label for="item${i}">${plate.text}</label>
       </li>
       `;
     }).join('');
   }
   
+  function toggleDone(e) {
+    if (!e.target.matches('input')) return; // only return input
+    const el = e.target;
+    const index = el.dataset.index;
+    items[index].done = !items[index].done;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList)
+  }
+
   addItems.addEventListener('submit',additem);
+  itemsList.addEventListener('click', toggleDone);
+  populateList(items, itemsList)
+
+  clear.addEventListener('click', () => {
+    localStorage.removeItem('items');
+    window.location.reload();
+  })
 </script>
 
 
