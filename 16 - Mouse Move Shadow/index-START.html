@@ -7,11 +7,12 @@
 <body>
 
   <div class="hero">
-    <h1 contenteditable>🔥WOAH!</h1>
+    <h1 contenteditable>🔥ANIMESH!</h1>
   </div>
 
   <style>
   html {
+    background-color: rgb(226, 213, 97);
     color: black;
     font-family: sans-serif;
   }
@@ -32,9 +33,35 @@
     text-shadow: 10px 10px 0 rgba(0,0,0,1);
     font-size: 100px;
   }
+  
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 100;
+
+  function shadow(e) {
+    // const width = hero.offsetWidth;
+    // const height = hero.offsetHeight;
+    // object destructuring
+    const { offsetWidth: width, offsetHeight: height } = hero;
+    // look at the distance from the top and bottom corner of the window
+    let { clientX: x, clientY: y} = e;
+
+
+    xWalk = Math.round((x / width * walk) - (walk / 2));
+    yWalk = Math.round((y / height * walk) - (walk / 2));
+
+    text.style.textShadow = `
+      ${xWalk}px ${yWalk}px 0 rgba(255,0,255,0.7),
+      ${xWalk * -1}px ${yWalk}px 0 rgba(0,255,255,0.7),
+      ${yWalk}px ${xWalk * -1}px 0 rgba(0,255,0,0.7),
+      ${yWalk * -1}px ${xWalk}px 0 rgba(0,0,255,0.7)
+    `;
+  }
+
+  hero.addEventListener('mousemove', shadow)
 </script>
 </body>
 </html>
