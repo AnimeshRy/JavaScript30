@@ -8,10 +8,39 @@
 
   <div class="words" contenteditable>
   </div>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
 
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition();
+  // as we speek it will keep populating it 
+  recognition.interimResults = true;
+
+  let p = document.createElement('p');
+  const words = document.querySelector('.words');
+  words.appendChild(p);
+
+
+  recognition.addEventListener('result', e => {
+    // convert to array
+    const transcript = Array.from(e.results)
+    .map(result => results[0])
+    .map(result => result.transcript)
+    .join('')
+
+    p.textContent = transcript;
+    if (e.results[0].isFinal) {
+      p = document.createElement('p');
+      words.appendChild(p);
+    }
+    if (transcript.includes('unicorn')) {
+      cornify_add();
+    }
+    console.log(transcript);
+  })
+
+  recognition.start()
 
 </script>
 
@@ -22,7 +51,7 @@
     }
 
     body {
-      background: #ffc600;
+      background: #201b1b;
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;
