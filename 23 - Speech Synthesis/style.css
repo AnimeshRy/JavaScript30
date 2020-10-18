@@ -92,3 +92,41 @@ input[type="select"] {
 .voiceinator button:nth-of-type(1) {
   margin-right: 2%;
 }
+.ribbon {
+  width: 100px;
+  height: 150px;
+  background-color: #fff;
+  position: absolute;
+  right: 100px;
+  top: -350px;
+  animation: drop forwards 0.8s 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.ribbon:before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  bottom: -50px;
+  border-left: 50px solid #fff;
+  border-right: 50px solid #fff;
+  border-bottom: 50px solid transparent;
+}
+.ribbon:after {
+  content: "";
+  width: 200px;
+  height: 270px;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: -120px;
+  transform: skewY(35deg) skewX(0);
+}
+
+@keyframes drop {
+  0% {
+    top: -350px;
+  }
+  100% {
+    top: 0;
+  }
+}
