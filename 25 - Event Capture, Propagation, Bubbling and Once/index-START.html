@@ -46,12 +46,15 @@ const divs = document.querySelectorAll('div');
 
 function logText(e) {
   console.log(this.classList.value);
+  // e.stopPropagation(); // stops the bubbling
+
 }
 
 divs.forEach(div => div.addEventListener('click', logText, {
-  capture:true
+  capture:false, once:true
 }));
-// run the function on the way down, rather than way up (capture)
+// run the function on the way down, rather than way up (capture = true)
+// once unbinds itself after first eventlistening
 </script>
 </body>
 </html>
