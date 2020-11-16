@@ -55,7 +55,8 @@
     slider.classList.remove('active');
   })
   slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return; // stop function from running
+    // stop function from running
+    if (!isDown) return; 
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
     const walk = (x - startX) * 3;
